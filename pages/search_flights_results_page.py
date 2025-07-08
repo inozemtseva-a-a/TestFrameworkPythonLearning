@@ -1,9 +1,12 @@
+import logging
 import time
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from utilities.utils import Utils
 
 
 class SearchFlightResults(BaseDriver):
+    log = Utils.custom_logger(log_level=logging.WARNING)
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -30,12 +33,15 @@ class SearchFlightResults(BaseDriver):
     def filter_flights_by_stop(self, by_stop):
         if by_stop == "1 Stop":
             self.get_filter_by_one_stop_icon().click()
+            self.log.warning("Selected 1 Stop")
             time.sleep(2)
         elif by_stop == "2 Stop":
             self.get_filter_by_two_stop_icon().click()
+            self.log.warning("Selected 2 Stop")
             time.sleep(2)
         elif by_stop == "Non Stop":
             self.get_filter_by_non_stop_icon().click()
+            self.log.warning("Selected non Stop")
             time.sleep(2)
         else:
             print("Please provide valid filter option")

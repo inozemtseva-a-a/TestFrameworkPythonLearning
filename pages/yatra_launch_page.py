@@ -3,9 +3,11 @@ from selenium.webdriver.common.by import By
 import time
 from base.base_driver import BaseDriver
 from pages.search_flights_results_page import SearchFlightResults
+from utilities.utils import Utils
 
 
 class LaunchPage(BaseDriver):
+    log = Utils.custom_logger()
     def __init__(self,driver):
         super().__init__(driver)
         self.driver = driver
@@ -44,8 +46,10 @@ class LaunchPage(BaseDriver):
 
     def enterGoingToLocation(self, goingtolocation):
         self.getGoingToField().click()
+        self.log.info("Clicked on going to")
         time.sleep(2)
         self.getGoingToField().send_keys(goingtolocation)
+        self.log.info("Typed text into going to field successfully")
         time.sleep(2)
         search_results = self.getGoingToResults()
         for results in search_results:

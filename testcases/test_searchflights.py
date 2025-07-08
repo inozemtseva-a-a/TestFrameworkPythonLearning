@@ -19,6 +19,7 @@ verify that the filtered results show flights having only 1 stop
 @pytest.mark.usefixtures("setup")
 @ddt()
 class TestSearchAndVerifyFilter(softest.TestCase):
+    log = Utils.custom_logger()
 
     @pytest.fixture(autouse=True)
     def class_setup(self):
@@ -44,7 +45,7 @@ class TestSearchAndVerifyFilter(softest.TestCase):
         self.lp.page_scroll()
         search_flight_result.filter_flights_by_stop(stops)
         allstops1 = search_flight_result.get_search_flight_results()
-        print(len(allstops1))
+        self.log.onfo(len(allstops1))
         self.ut.assertListItemText(allstops1, stops)
 
     # def test_search_flights_2_stop(self):
